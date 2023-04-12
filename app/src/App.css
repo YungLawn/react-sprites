@@ -15,18 +15,21 @@ html, body, #root, .App {
 
 .char {
   image-rendering: pixelated;
-  border: 1px solid white;
-  scale: 10;
-  width: 64px;
-  height: 64px;
+  border: 0.5px solid white;
+  scale: 50;
+  width: 16px;
+  height: 32px;
   position: absolute;
-  background: url(./assets/spritesheets/human/walk/IsoHumanWalk-E.png);
-  animation: walk-east 1s steps(8) infinite;
+  background: url(./assets/spritesheets/human/walk/IsoHumanWalk-Sheet.png);
+  animation: walk-spin 6s steps(64) infinite;
+  /* animation-iteration-count: 8; */
 }
 
-@keyframes walk-east {
-  to { background-position: 114.3%}
+@keyframes walk-spin {
+  to { background-position: -1024px}
 }
-
+@keyframes walk {
+  to { background-position: -1024px}
+}
 
 
