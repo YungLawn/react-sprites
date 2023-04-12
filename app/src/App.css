@@ -1,0 +1,32 @@
+
+html, body, #root, .App {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(108, 214, 156);
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.char {
+  image-rendering: pixelated;
+  border: 1px solid white;
+  scale: 10;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  background: url(./assets/spritesheets/human/walk/IsoHumanWalk-E.png);
+  animation: walk-east 1s steps(8) infinite;
+}
+
+@keyframes walk-east {
+  to { background-position: 114.3%}
+}
+
+
+
