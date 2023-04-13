@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const MovingDiv = () => {
   const [dir, setDir] = useState('s')
-  const [xPos, setXPos] = useState(0);
-  const [yPos, setYPos] = useState(0);
+  const [xPos, setXPos] = useState(window.innerWidth/2);
+  const [yPos, setYPos] = useState(window.innerHeight/2);
   const keyDownRef = useRef(new Set());
 
   const handleKeyDown = (event) => {

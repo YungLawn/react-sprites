@@ -4,8 +4,8 @@ import './App.css'
 function App() {
   const [dir, setDir] = useState('s')
   const [keysPressed, setKeysPressed] = useState(new Set());
-  const [xPos, setXPos] = useState(0);
-  const [yPos, setYPos] = useState(0);
+  const [xPos, setXPos] = useState('50px');
+  const [yPos, setYPos] = useState('50px');
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -67,7 +67,7 @@ function App() {
   return (
     <div className="App">
       {/* <p style={{zIndex: 2}}>Pressed keys: {Array.from(keysPressed).join(',')}</p> */}
-      <div className='char' style={{animationName: 'walk-'+ dir, top: yPos, left: xPos}}></div>
+      <div className='char' style={{animationName: 'walk-'+ dir, top: xPos, left: yPos}}></div>
     </div>
   )
 }
