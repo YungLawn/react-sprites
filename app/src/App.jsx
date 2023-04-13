@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import HumanIdle from './assets/spritesheets/human/idle/IsoHumanIdle-E.png'
 // import HumanWalk from './assets/spritesheets/human/walk'
 import './App.css'
@@ -6,41 +6,28 @@ import './App.css'
 function App() {
   const [dir,setDir] = useState('s')
 
-  function handleKeyPress(event) {
+  useEffect(( ) => {
+    document.addEventListener('keydown', handleKeyPress, true)
+  },[])
+
+  // const detectKeyDown = (e) => {
+  //   console.log(e.key.toString())
+  // }
+
+  const handleKeyPress = (event) => {
 
     const { key } = event;
+    console.log(key)
 
-   if (key.keyCode === 87) {
-      console.log('here')
-
-      setDir('nw');
-
-    } else if (key === 's' && 'd') {
-
-      setDir('sw');
-
-    } else if (key === 's' && 'd') {
-
-      setDir('se');
-
-    } else if (key === 'w') {
-
-      setDir('n');
-
+    if (key === 'w') {
+      setDir('n')
     } else if (key === 'a') {
-
       setDir('w');
-
     } else if (key === 's') {
-
       setDir('s');
-
     } else if (key === 'd') {
-
       setDir('e');
-
     }
-
   }
 
   return (
