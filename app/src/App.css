@@ -16,7 +16,7 @@ html, body, #root, .App {
 .char {
   image-rendering: pixelated;
   /* border: 0.5px solid white; */
-  scale: 10;
+  scale: 5;
   width: 16px;
   height: 32px;
   position: absolute;

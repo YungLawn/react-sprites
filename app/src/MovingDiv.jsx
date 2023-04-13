@@ -1,59 +1,79 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const MovingDiv = () => {
+  const [dir, setDir] = useState('s')
   const [xPos, setXPos] = useState(0);
   const [yPos, setYPos] = useState(0);
-  const keyDownRef = useRef({});
+  const keyDownRef = useRef(new Set());
 
   const handleKeyDown = (event) => {
     const { key } = event;
-    keyDownRef.current[key] = true;
+    keyDownRef.current.add(key);
   };
 
   const handleKeyUp = (event) => {
     const { key } = event;
-    delete keyDownRef.current[key];
+    keyDownRef.current.delete(key);
   };
 
   const updatePosition = () => {
-    console.log('tick')
-    if (keyDownRef.current.ArrowLeft) {
-      setXPos((xPos) => xPos - 10);
+    if (keyDownRef.current.has('a')) {
+      setXPos((xPos) => xPos - 1);
+      setDir('w')
     }
-    if (keyDownRef.current.ArrowRight) {
-      setXPos((xPos) => xPos + 10);
+    if (keyDownRef.current.has('d')) {
+      setXPos((xPos) => xPos + 1);
+      setDir('e')
     }
-    if (keyDownRef.current.ArrowUp) {
-      setYPos((yPos) => yPos - 10);
+    if (keyDownRef.current.has('w')) {
+      setYPos((yPos) => yPos - 1);
+      setDir('n')
     }
-    if (keyDownRef.current.ArrowDown) {
-      setYPos((yPos) => yPos + 10);
+    if (keyDownRef.current.has('s')) {
+      setYPos((yPos) => yPos + 1);
+      setDir('s')
     }
-
-    requestAnimationFrame(updatePosition);
+    if (keyDownRef.current.has('s') && keyDownRef.current.has('a')) {
+      setDir('sw')
+    }
+    if (keyDownRef.current.has('s') && keyDownRef.current.has('d')) {
+      setDir('se')
+    }
+    if (keyDownRef.current.has('w') && keyDownRef.current.has('a')) {
+      setDir('nw')
+    }
+    if (keyDownRef.current.has('w') && keyDownRef.current.has('d')) {
+      setDir('ne')
+    }
   };
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
-    requestAnimationFrame(updatePosition);
+
+    let requestId;
+
+    const update = () => {
+      updatePosition();
+      requestAnimationFrame(update);
+    };
+
+    requestId = requestAnimationFrame(update);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
+      cancelAnimationFrame(requestId);
     };
   }, []);
 
-  const style = {
-    position: 'absolute',
-    left: xPos,
-    top: yPos,
-    width: '50px',
-    height: '50px',
-    backgroundColor: 'red',
-  };
+  return (
+    <div className='App'>
+      <p style={{zIndex: 2}}>Pressed keys: {Array.from(keyDownRef.current).join(',')}</p>
+      <div className='char' style={{animationName: 'walk-'+ dir, top: yPos, left: xPos}}></div>
+    </div>
 
-  return <div style={style} />;
+  )
 };
 
 export default MovingDiv;
