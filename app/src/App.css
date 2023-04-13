@@ -15,8 +15,8 @@ html, body, #root, .App {
 
 .char {
   image-rendering: pixelated;
-  border: 0.5px solid white;
-  scale: 50;
+  /* border: 0.5px solid white; */
+  scale: 10;
   width: 16px;
   height: 32px;
   position: absolute;
@@ -24,15 +24,6 @@ html, body, #root, .App {
   animation-duration: 1s;
   animation-timing-function: steps(8);
   animation-iteration-count: infinite;
-  /* animation-name: walk-ne; */
-  /* animation-name: walk-ne; */
-  /* animation-name: walk-e; */
-  /* animation-name: walk-se; */
-  /* animation-name: walk-s; */
-  /* animation-name: walk-sw; */
-  /* animation-name: walk-w;/ */
-  /* animation-name: walk-nw; */
-  /* animation-name: walk-n; */
 }
 
 @keyframes walk-spin {
